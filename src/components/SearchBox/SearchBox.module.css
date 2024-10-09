@@ -1,0 +1,24 @@
+.labelForm {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+}
+
+.searchBoxForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.inputSearchboxForm {
+  border-radius: 5px;
+  width: 400px;
+  height: 30px;
+  margin-top: 10px;
+}
+
+.searchBox {
+  margin-top: 50px;
+}

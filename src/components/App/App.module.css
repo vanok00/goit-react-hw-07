@@ -1,0 +1,9 @@
+.book {
+  font-size: 32px;
+}
+
+.wholeContainer {
+  margin-left: 32px;
+  padding: 16px 32px;
+  width: 500px;
+}
