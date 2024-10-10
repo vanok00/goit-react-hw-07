@@ -4,7 +4,7 @@ import styles from "./ContactList.module.css";
 import { selectContacts } from "../../redux/contactsSliсe";
 import { selectNameFilter } from "../../redux/filtersSlice";
 
-export default function ContactList() {
+const ContactList = () => {
   const contacts = useSelector(selectContacts);
   const searchStr = useSelector(selectNameFilter);
   const filteredData = contacts.filter((contact) =>
@@ -22,4 +22,6 @@ export default function ContactList() {
       </ul>
     </div>
   );
-}
+};
+
+export default ContactList;
