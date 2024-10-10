@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { fetchContacts } from "./contactsOps";
+import { deleteContactThunk, fetchContacts } from "./contactsOps";
 
 const initialState =  {
 items: [],
@@ -32,11 +32,15 @@ setError: (state, action) => {
         }
     },
     extraReducers: builder => {
-      builder.addCase(fetchContacts.fulfilled), (state, action) => {
-        state.items = action.payload
-      }
-    }
-  })
+      builder
+      .addCase(fetchContacts.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addCase(deleteContactThunk.fulfilled, (state, action) => {
+        state.items = state.items.filter(item => item.id !== action.payload);
+      })
+    },
+  });
 
 export const selectContacts = state => state.contacts.items
 
