@@ -3,9 +3,10 @@ import Contact from "../Contact/Contact";
 import styles from "./ContactList.module.css";
 import { selectContacts, selectIsLoading } from "../../redux/contactsSliсe";
 import { selectNameFilter } from "../../redux/filtersSlice";
+import Loader from "../Loader/Loader";
 
 const ContactList = () => {
-  const isLoading = useSelector(selectIsLoading);
+  const loading = useSelector(selectIsLoading);
   const contacts = useSelector(selectContacts);
   const searchStr = useSelector(selectNameFilter);
   const filteredData = contacts.filter((contact) =>
@@ -15,9 +16,9 @@ const ContactList = () => {
   return (
     <div>
       <ul className={styles.contactList}>
+        {loading && <Loader />}
         {filteredData.map((contact) => (
           <li key={contact.id}>
-            {isLoading && <h2>Loading...</h2>}
             <Contact contact={contact} />
           </li>
         ))}

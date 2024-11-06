@@ -18,12 +18,24 @@ const slice = createSlice({
     builder
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.items = action.payload;
+        state.loading = false;
       })
       .addCase(deleteContactThunk.fulfilled, (state, action) => {
         state.items = state.items.filter((item) => item.id !== action.payload);
+        state.loading = false;
       })
       .addCase(addContactThunk.fulfilled, (state, action) => {
         state.items.push(action.payload);
+        state.loading = false;
+      })
+      .addCase(fetchContacts.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(deleteContactThunk.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(addContactThunk.pending, (state, action) => {
+        state.loading = true;
       });
   },
 });
@@ -32,4 +44,4 @@ export const selectContacts = (state) => state.contacts.items;
 
 export const contactReducer = slice.reducer;
 
-export const selectIsLoading = (state) => state.contacts.isLoading;
+export const selectIsLoading = (state) => state.contacts.loading;
