@@ -33,7 +33,21 @@ const slice = createSlice({
           fetchContacts.pending,
           deleteContactThunk.pending,
           addContactThunk.pending
-        )
+        ),
+        (state, action) => {
+          state.loading = true;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          fetchContacts.rejected,
+          deleteContactThunk.pending,
+          addContactThunk.pending
+        ),
+        (state, action) => {
+          state.loading = false;
+          state.error = action.payload;
+        }
       );
   },
 });
@@ -43,3 +57,5 @@ export const selectContacts = (state) => state.contacts.items;
 export const contactReducer = slice.reducer;
 
 export const selectIsLoading = (state) => state.contacts.loading;
+
+export const selectIsError = (state) => state.contacts.error;
