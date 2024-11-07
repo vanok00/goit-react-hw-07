@@ -18,11 +18,11 @@ export default function App() {
   return (
     <div>
       {/* {isLoading && <h2>Loading...</h2>} */}
-      {error && <Loader />}
       <h1 className={styles.book}>Phonebook</h1>
       <ContactForm />
 
       <SearchBox />
+      {error && <h2>THERE WAS EN ERROR</h2>}
       <ContactList />
     </div>
   );

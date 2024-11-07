@@ -18,15 +18,12 @@ const slice = createSlice({
     builder
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.items = action.payload;
-        state.loading = false;
       })
       .addCase(deleteContactThunk.fulfilled, (state, action) => {
         state.items = state.items.filter((item) => item.id !== action.payload);
-        state.loading = false;
       })
       .addCase(addContactThunk.fulfilled, (state, action) => {
         state.items.push(action.payload);
-        state.loading = false;
       })
       .addMatcher(
         isAnyOf(
@@ -40,9 +37,19 @@ const slice = createSlice({
       )
       .addMatcher(
         isAnyOf(
+          fetchContacts.fulfilled,
+          deleteContactThunk.fulfilled,
+          addContactThunk.fulfilled
+        ),
+        (state, action) => {
+          state.loading = false;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
           fetchContacts.rejected,
-          deleteContactThunk.pending,
-          addContactThunk.pending
+          deleteContactThunk.rejected,
+          addContactThunk.rejected
         ),
         (state, action) => {
           state.loading = false;
