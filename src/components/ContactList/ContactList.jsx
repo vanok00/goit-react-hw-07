@@ -3,6 +3,7 @@ import Contact from "../Contact/Contact";
 import styles from "./ContactList.module.css";
 import {
   selectContacts,
+  selectFilteredContacts,
   selectIsError,
   selectIsLoading,
 } from "../../redux/contactsSliсe";
@@ -11,7 +12,7 @@ import Loader from "../Loader/Loader";
 
 const ContactList = () => {
   const loading = useSelector(selectIsLoading);
-  const contacts = useSelector(selectContacts);
+  const contacts = useSelector(selectFilteredContacts);
   const error = useSelector(selectIsError);
   const searchStr = useSelector(selectNameFilter);
   const filteredData = contacts.filter((contact) =>
@@ -22,7 +23,7 @@ const ContactList = () => {
     <div>
       <ul className={styles.contactList}>
         {loading && <Loader />}
-        {error && <h2>THERE WAS EN ERROR</h2>}
+        {error && <h2>LOADING OR AN ERROR</h2>}
         {filteredData.map((contact) => (
           <li key={contact.id}>
             <Contact contact={contact} />
@@ -34,3 +35,4 @@ const ContactList = () => {
 };
 
 export default ContactList;
+// {error && <h2>LOADING OR AN ERROR</h2>}
